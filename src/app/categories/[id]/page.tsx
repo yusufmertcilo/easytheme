@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import ThemeCard from '@/components/theme/ThemeCard';
 
 // Mock data for category details
@@ -46,7 +45,7 @@ const categoryData = {
   ],
 };
 
-export default function CategoryPage({ params }: { params: { id: string } }) {
+export default function CategoryPage() {
   const [selectedSubcategory, setSelectedSubcategory] = useState('all');
   const [sortBy, setSortBy] = useState('popular');
 
