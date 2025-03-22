@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 interface Theme {
-  id: number;
+  id: string;
   name: string;
   price: number;
   image: string;
@@ -12,8 +12,8 @@ interface Theme {
 interface FavoritesContextType {
   favorites: Theme[];
   addFavorite: (theme: Theme) => void;
-  removeFavorite: (themeId: number) => void;
-  isFavorite: (themeId: number) => boolean;
+  removeFavorite: (id: string) => void;
+  isFavorite: (id: string) => boolean;
 }
 
 const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
@@ -22,26 +22,26 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
   const [favorites, setFavorites] = useState<Theme[]>([]);
 
   useEffect(() => {
-    const savedFavorites = localStorage.getItem('favorites');
-    if (savedFavorites) {
-      setFavorites(JSON.parse(savedFavorites));
+    const storedFavorites = localStorage.getItem('favorites');
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
+
   const addFavorite = (theme: Theme) => {
-    const newFavorites = [...favorites, theme];
-    setFavorites(newFavorites);
-    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    setFavorites((prev) => [...prev, theme]);
   };
 
-  const removeFavorite = (themeId: number) => {
-    const newFavorites = favorites.filter(theme => theme.id !== themeId);
-    setFavorites(newFavorites);
-    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+  const removeFavorite = (id: string) => {
+    setFavorites((prev) => prev.filter((theme) => theme.id !== id));
   };
 
-  const isFavorite = (themeId: number) => {
-    return favorites.some(theme => theme.id === themeId);
+  const isFavorite = (id: string) => {
+    return favorites.some((theme) => theme.id === id);
   };
 
   return (
