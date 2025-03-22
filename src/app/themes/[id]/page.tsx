@@ -2,7 +2,75 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import ThemeGallery from '@/components/theme/ThemeGallery';
 
+export default function ThemePage() {
+  // Mock data for theme details
+  const theme = {
+    id: 1,
+    name: "Business Pro",
+    description: "A professional WordPress theme for businesses and corporations",
+    price: 59,
+    rating: 4.8,
+    totalSales: 1500,
+    previewImage: "https://via.placeholder.com/1200x800",
+    screenshots: [
+      "https://via.placeholder.com/1200x800",
+      "https://via.placeholder.com/1200x800",
+      "https://via.placeholder.com/1200x800",
+      "https://via.placeholder.com/1200x800"
+    ],
+    features: [
+      "Responsive Design",
+      "Customizable Header",
+      "Multiple Layout Options",
+      "SEO Optimized",
+      "Fast Loading",
+      "Translation Ready"
+    ],
+    author: {
+      name: "John Doe",
+      avatar: "https://via.placeholder.com/150",
+      rating: 4.9,
+      totalThemes: 25
+    },
+    category: "Business",
+    tags: ["WordPress", "Business", "Corporate", "Professional"],
+    lastUpdated: "2024-03-22",
+    version: "1.2.0",
+    compatibleWith: "WordPress 6.0+",
+    similarThemes: [
+      {
+        id: 2,
+        name: "Corporate Plus",
+        price: 49,
+        image: "https://via.placeholder.com/300x200"
+      },
+      {
+        id: 3,
+        name: "Enterprise Pro",
+        price: 69,
+        image: "https://via.placeholder.com/300x200"
+      }
+    ]
+  };
+
+  return (
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column - Gallery */}
+          <div className="lg:col-span-2">
+            <ThemeGallery images={theme.screenshots} title={theme.name} />
+          </div>
+
+          {/* Right Column - Details */}
+          <div className="space-y-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{theme.name}</h1>
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="flex items-center">
+                  <svg className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
 // Mock data for theme details
 const themeData = {
   id: '1',
