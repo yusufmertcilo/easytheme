@@ -3,11 +3,15 @@
 import Link from 'next/link';
 import { useTheme } from '@/context/ThemeContext';
 import { useAuth } from '@/context/AuthContext';
+import { useLanguage } from '@/context/LanguageContext';
 import SearchBar from '@/components/search/SearchBar';
+import LanguageSelector from '@/components/common/LanguageSelector';
+import { t } from '@/utils/i18n';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const { user, logout } = useAuth();
+  const { language } = useLanguage();
 
   const handleLogout = async () => {
     try {
@@ -27,13 +31,13 @@ export default function Navbar() {
             </Link>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <Link href="/themes" className="text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">
-                Themes
+                {t('nav.themes', language)}
               </Link>
               <Link href="/categories" className="text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">
-                Categories
+                {t('nav.categories', language)}
               </Link>
               <Link href="/authors" className="text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">
-                Authors
+                {t('nav.authors', language)}
               </Link>
             </div>
           </div>
@@ -41,6 +45,7 @@ export default function Navbar() {
             <div className="w-64">
               <SearchBar />
             </div>
+            <LanguageSelector />
             <button
               onClick={toggleTheme}
               className="p-2 rounded-md text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400"
@@ -59,22 +64,22 @@ export default function Navbar() {
               {user ? (
                 <>
                   <Link href="/dashboard" className="text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">
-                    Dashboard
+                    {t('nav.dashboard', language)}
                   </Link>
                   <button
                     onClick={handleLogout}
                     className="bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded-md text-sm font-medium"
                   >
-                    Logout
+                    {t('nav.logout', language)}
                   </button>
                 </>
               ) : (
                 <>
                   <Link href="/login" className="text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">
-                    Login
+                    {t('nav.login', language)}
                   </Link>
                   <Link href="/register" className="bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md text-sm font-medium">
-                    Sign Up
+                    {t('nav.register', language)}
                   </Link>
                 </>
               )}
