@@ -1,13 +1,17 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import ThemeGallery from '@/components/theme/ThemeGallery';
 
-export default function ThemePage() {
+interface ThemePageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function ThemePage({ params }: ThemePageProps) {
   // Mock data for theme details
   const theme = {
-    id: 1,
+    id: params.id,
     name: "Business Pro",
     description: "A professional WordPress theme for businesses and corporations",
     price: 59,
