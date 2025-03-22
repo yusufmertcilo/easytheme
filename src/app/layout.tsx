@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { FavoritesProvider } from "@/context/FavoritesContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,15 +23,17 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <body className={`${inter.className} h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-white`}>
         <ThemeProvider>
-          <FavoritesProvider>
-            <div className="min-h-full">
-              <Navbar />
-              <main className="flex-grow">
-                {children}
-              </main>
-              <Footer />
-            </div>
-          </FavoritesProvider>
+          <AuthProvider>
+            <FavoritesProvider>
+              <div className="min-h-full">
+                <Navbar />
+                <main className="flex-grow">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </FavoritesProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
